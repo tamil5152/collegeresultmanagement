@@ -191,7 +191,7 @@ Only non-secret values may use `VITE_`; they are public in the bundle.
 ## 6. Testing
 
 ```bash
-cd backend && mvn test            # 96 tests: unit + integration
+cd backend && mvn test            # 98 tests: unit + integration
 cd frontend && npm run build
 ```
 

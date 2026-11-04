@@ -10,6 +10,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -74,6 +75,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ErrorResponse.of(409, "DATA_INTEGRITY",
                         "The operation conflicts with existing related data or violates a data constraint"));
+    }
+
+    /**
+     * MySQL 8 reports a violated CHECK constraint as error 3819, which Spring does not classify as a data-integrity
+     * problem (MariaDB's equivalent is mapped already). Treat it the same way instead of returning a 500.
+     */
+    @ExceptionHandler(UncategorizedSQLException.class)
+    ResponseEntity<ErrorResponse> handleUncategorizedSql(UncategorizedSQLException ex) {
+        if (ex.getSQLException() != null && ex.getSQLException().getErrorCode() == 3819) {
+            log.warn("Check constraint violated: {}", ex.getSQLException().getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorResponse.of(409, "DATA_INTEGRITY",
+                    "The operation violates a data constraint"));
+        }
+        return handleOther(ex);
     }
 
     @ExceptionHandler(AccessDeniedException.class)

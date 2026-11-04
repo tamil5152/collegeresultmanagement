@@ -40,8 +40,10 @@ class RepositoryIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     void negativeMarksViolateTheCheckConstraint() {
+        // MySQL 8 raises error 3819 (Spring: UncategorizedSQLException), MariaDB a DataIntegrityViolationException.
         assertThatThrownBy(() -> marks.insert(1, 9, 3, new BigDecimal("-1"), null, 1))
-                .isInstanceOf(DataIntegrityViolationException.class);
+                .isInstanceOf(org.springframework.dao.DataAccessException.class)
+                .hasMessageContaining("chk_marks_nonneg");
     }
 
     @Test

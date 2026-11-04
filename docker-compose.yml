@@ -1,0 +1,28 @@
+# Local DEVELOPMENT database only (MySQL 8). Never use these credentials anywhere else.
+#   docker compose up -d db
+# On the first start it creates crms_dev (schema + DEV seed data) and the crms_test database used by the tests.
+services:
+  db:
+    image: mysql:8.0
+    container_name: crms-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: crms_root_dev_pw
+      MYSQL_DATABASE: crms_dev
+      MYSQL_USER: crms
+      MYSQL_PASSWORD: crms_dev_pw
+    ports:
+      - "3306:3306"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci
+    volumes:
+      - crms-db-data:/var/lib/mysql
+      - ./database/dev/00-create-test-database.sql:/docker-entrypoint-initdb.d/00-create-test-database.sql:ro
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pcrms_root_dev_pw"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  crms-db-data:

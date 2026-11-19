@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tamil | Portfolio</title>
+  <meta name="description" content="Personal portfolio: projects, skills and contact details.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#top">Tamil<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button id="theme" aria-label="Toggle dark / light theme">◐</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Hi, I'm</p>
+      <h1>Tamil</h1>
+      <p class="lead">I build full-stack web applications: clean React front ends backed by solid Java and SQL.</p>
+      <div class="cta">
+        <a class="btn" href="#projects">View my work</a>
+        <a class="btn ghost" href="#contact">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        <!-- TODO: replace with your own story -->
+        I'm a developer who enjoys turning real-world problems into simple, reliable software.
+        I like working across the whole stack, from database design to the user interface,
+        and I'm looking for opportunities to learn and ship useful products.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="chips">
+        <li>Java</li><li>Spring Boot</li><li>JDBC</li><li>MySQL</li>
+        <li>React</li><li>JavaScript</li><li>HTML &amp; CSS</li>
+        <li>Docker</li><li>Git &amp; GitHub</li><li>REST APIs</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>College Result Management System</h3>
+          <p>Web app for managing students, courses, marks and published results. React front end, Spring Boot (JDBC) backend, MySQL database, Dockerised with CI.</p>
+          <ul class="tags"><li>React</li><li>Spring Boot</li><li>MySQL</li><li>Docker</li></ul>
+          <a href="https://github.com/tamil5152/collegeresultmanagement" target="_blank" rel="noopener">View on GitHub →</a>
+        </article>
+        <article class="card">
+          <h3>Your next project</h3>
+          <p><!-- TODO --> Add a short description of what it does and what you learned.</p>
+          <ul class="tags"><li>Tech</li><li>Stack</li></ul>
+          <a href="#">Link →</a>
+        </article>
+        <article class="card">
+          <h3>Another project</h3>
+          <p><!-- TODO --> Add a short description of what it does and what you learned.</p>
+          <ul class="tags"><li>Tech</li><li>Stack</li></ul>
+          <a href="#">Link →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Want to work together or just say hi? Reach out:</p>
+      <ul class="links">
+        <li><a href="https://github.com/tamil5152" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="#" target="_blank" rel="noopener">LinkedIn</a> <!-- TODO: your URL --></li>
+        <li><a href="#">Email</a> <!-- TODO: mailto:you@example.com --></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Tamil. Built with plain HTML, CSS and JS.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
